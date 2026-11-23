@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Diogo Garay Fotografia</title>
   <script src="./vendor/react.js"></script>
   <script src="./vendor/react-dom.js"></script>
@@ -41,7 +42,9 @@
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          min-height: 40px;
+          min-height: 44px;
+          min-width: 44px;
+          justify-content: center;
           padding: 0 14px;
           border: 1px solid rgba(255, 255, 255, .28);
           border-radius: 8px;
@@ -67,7 +70,7 @@
         .menu-panel {
           position: absolute;
           top: calc(100% - 4px);
-          right: clamp(16px, 4vw, 48px);
+          right: 0;
           z-index: 60;
           display: grid;
           min-width: min(320px, calc(100vw - 32px));
@@ -80,7 +83,10 @@
         }
 
         .menu-panel a {
-          padding: 13px 14px;
+          display: flex;
+          align-items: center;
+          min-height: 44px;
+          padding: 0 14px;
           border-radius: 4px;
           font-weight: 500
         }
@@ -150,7 +156,7 @@
 
         @media(max-width:520px) {
           .masonry {
-            column-count: 1
+            column-count: 2
           }
         }
 
@@ -263,6 +269,99 @@
             animation: none
           }
         }
+
+        /* Responsivo: alvos de toque de 44px */
+        html {
+          -webkit-text-size-adjust: 100%
+        }
+
+        header>a,
+        .svc a,
+        #contato a,
+        footer a {
+          display: inline-flex;
+          align-items: center;
+          min-height: 44px
+        }
+
+        /* Responsivo: telas até 700px */
+        @media(max-width:700px) {
+          .blob {
+            filter: blur(50px)
+          }
+
+          .b1 {
+            width: 300px;
+            height: 300px;
+            left: -100px;
+            top: -60px
+          }
+
+          .b2 {
+            width: 340px;
+            height: 340px;
+            right: -140px;
+            top: 120px
+          }
+
+          .b3 {
+            width: 240px;
+            height: 240px;
+            bottom: -100px
+          }
+
+          .svc article {
+            min-height: 0 !important
+          }
+        }
+
+        /* Responsivo: celulares até 520px */
+        @media(max-width:520px) {
+          #topo {
+            min-height: 0 !important
+          }
+
+          .masonry figure {
+            width: 100%;
+            min-height: 190px
+          }
+
+          .hero-cta {
+            width: 100%
+          }
+
+          .hero-cta a {
+            flex: 1 1 100%;
+            text-align: center
+          }
+        }
+
+        .nav-desktop {
+          display: none
+        }
+
+        @media (min-width: 650px) {
+          .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 8px 28px;
+            font-size: 15px;
+            font-weight: 500
+          }
+
+          .nav-desktop .nav-quote {
+            background: #ff4a18;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 999px;
+            font-weight: 700
+          }
+
+          .menu-toggle,
+          .menu-panel {
+            display: none
+          }
+        }
       </style>
     </helmet>
 
@@ -272,9 +371,15 @@
       <div role="navigation" aria-label="Acesso rápido"
         style="position:sticky;top:0;z-index:50;background:#14121A;border-bottom:1px solid rgba(255,255,255,.14)">
         <div class="wrap" style="display:flex;align-items:center;gap:16px">
-          <header class="wrap"
-            style="position:relative;width:100%;padding-top:24px;padding-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+          <header
+            style="position:relative;width:100%;padding:10px 0;display:flex;align-items:center;justify-content:space-between;gap:16px">
             <a href="#topo" class="d" style="font-size:28px;line-height:1">Diogo Garay</a>
+            <nav class="nav nav-desktop" aria-label="Navegação principal">
+              <a href="#trabalhos">Trabalhos</a>
+              <a href="#servicos">Serviços</a>
+              <a href="#sobre">Sobre</a>
+              <a href="#contato" class="nav-quote">Pedir orçamento</a>
+            </nav>
             <button type="button" class="menu-toggle" aria-label="Menu de navegação" aria-expanded="{{menuExpanded}}"
               aria-controls="menu-principal" onClick="{{toggleMenu}}">
               <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
@@ -293,7 +398,7 @@
 
       <!-- HERO -->
       <section id="topo"
-        style="position:relative;overflow:hidden;min-height:720px;display:flex;flex-direction:column;justify-content:space-between;background:#0C0B10">
+        style="position:relative;overflow:hidden;min-height:clamp(560px,88vh,760px);display:flex;flex-direction:column;justify-content:flex-end;background:#0C0B10">
         <div style="position:absolute;inset:0;overflow:hidden" aria-hidden="true">
           <div class="blob b1"></div>
           <div class="blob b2"></div>
@@ -304,7 +409,7 @@
         </div>
 
         <div class="wrap"
-          style="position:relative;width:100%;padding-bottom:56px;display:flex;flex-direction:column;gap:28px">
+          style="position:relative;width:100%;padding-top:48px;padding-bottom:56px;display:flex;flex-direction:column;gap:28px">
           <div
             style="align-self:flex-start;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#D8D3DD">
             Aqui entra um vídeo em loop dos melhores momentos</div>
@@ -313,7 +418,7 @@
           <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
             <p style="margin:0;max-width:460px;font-size:19px;line-height:1.5;color:#E6E1EA">Registro seus melhores
               momentos. Festas, shows e eventos em Cuiabá e região, em fotos e vídeos prontos para postar.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <div class="hero-cta" style="display:flex;flex-wrap:wrap;gap:12px">
               <a href="#trabalhos" class="btn"
                 style="background:#F2EEE8;color:#0C0B10;padding:15px 26px;border-radius:999px;font-weight:700">Ver
                 trabalhos</a>
@@ -518,8 +623,8 @@
 
       <!-- CONTATO -->
       <section id="contato" style="padding:clamp(64px,10vw,128px) 0">
-        <div class="wrap" style="display:flex;flex-wrap:wrap;gap:56px">
-          <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:28px">
+        <div class="wrap" style="display:flex;flex-wrap:wrap;gap:40px 56px">
+          <div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:28px">
             <h2 class="d" style="margin:0;font-size:clamp(44px,8vw,112px);line-height:.9;text-wrap:balance">Vamos
               registrar o seu próximo evento?</h2>
             <div style="display:flex;flex-direction:column;gap:14px;font-size:18px">
