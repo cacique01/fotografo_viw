@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <title>Diogo Garay Fotografia</title>
+  <script src="./vendor/react.js"></script>
+  <script src="./vendor/react-dom.js"></script>
+  <script src="./support.js"></script>
+</head>
+
+<body>
+  <x-dc>
+    <helmet>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link
+        href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=DM+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet">
+      <style>
+        body {
+          margin: 0;
+          background: #0C0B10;
+          color: #F2EEE8;
+          font-family: 'DM Sans', system-ui, sans-serif
+        }
+
+        * {
+          box-sizing: border-box
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none
+        }
+
+        .nav a:hover {
+          opacity: .65
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          min-height: 40px;
+          padding: 0 14px;
+          border: 1px solid rgba(255, 255, 255, .28);
+          border-radius: 8px;
+          background: #0C0B10;
+          color: #F2EEE8;
+          font: inherit;
+          font-weight: 700;
+          cursor: pointer
+        }
+
+        .menu-icon {
+          display: grid;
+          gap: 4px;
+          width: 16px
+        }
+
+        .menu-icon span {
+          display: block;
+          height: 2px;
+          background: currentColor
+        }
+
+        .menu-panel {
+          position: absolute;
+          top: calc(100% - 4px);
+          right: clamp(16px, 4vw, 48px);
+          z-index: 60;
+          display: grid;
+          min-width: min(320px, calc(100vw - 32px));
+          gap: 4px;
+          padding: 10px;
+          border: 1px solid rgba(255, 255, 255, .16);
+          border-radius: 8px;
+          background: #14121A;
+          box-shadow: 0 16px 40px rgba(0, 0, 0, .35)
+        }
+
+        .menu-panel a {
+          padding: 13px 14px;
+          border-radius: 4px;
+          font-weight: 500
+        }
+
+        .menu-panel a:hover {
+          background: rgba(255, 255, 255, .08)
+        }
+
+        .menu-panel .menu-quote {
+          margin-top: 4px;
+          background: #ff4a18;
+          color: white;
+          font-weight: 700;
+          border-radius: 10px
+        }
+
+        html {
+          scroll-padding-top: 72px
+        }
+
+        .qa {
+          scrollbar-width: none
+        }
+
+        .qa::-webkit-scrollbar {
+          display: none
+        }
+
+        @media(max-width:560px) {
+          .qa-l {
+            display: none
+          }
+        }
+
+        .btn {
+          transition: transform .2s
+        }
+
+        .btn:hover {
+          transform: translateY(-2px)
+        }
+
+        .wrap {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding-left: clamp(16px, 4vw, 48px);
+          padding-right: clamp(16px, 4vw, 48px)
+        }
+
+        .d {
+          font-family: 'Big Shoulders Display', Impact, sans-serif;
+          text-transform: uppercase;
+          font-weight: 800;
+          letter-spacing: .01em
+        }
+
+        .masonry {
+          column-count: 3;
+          column-gap: 12px
+        }
+
+        @media(max-width:900px) {
+          .masonry {
+            column-count: 2
+          }
+        }
+
+        @media(max-width:520px) {
+          .masonry {
+            column-count: 1
+          }
+        }
+
+        .svc {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 16px
+        }
+
+        @media(max-width:1000px) {
+          .svc {
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+          }
+        }
+
+        @media(max-width:560px) {
+          .svc {
+            grid-template-columns: minmax(0, 1fr)
+          }
+        }
+
+        .field {
+          width: 100%;
+          background: #16141C;
+          color: #F2EEE8;
+          border: 1px solid rgba(255, 255, 255, .2);
+          border-radius: 6px;
+          padding: 12px 14px;
+          font: inherit;
+          font-size: 16px;
+          min-height: 48px
+        }
+
+        .field:focus-visible,
+        a:focus-visible,
+        button:focus-visible {
+          outline: 2px solid #F2EEE8;
+          outline-offset: 3px
+        }
+
+        .track {
+          display: flex;
+          gap: 12px;
+          width: max-content;
+          animation: slide 60s linear infinite
+        }
+
+        @keyframes slide {
+          to {
+            transform: translateX(calc(-50% - 6px))
+          }
+        }
+
+        .blob {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(80px);
+          opacity: .5
+        }
+
+        .b1 {
+          width: 520px;
+          height: 520px;
+          background: #FF2D55;
+          left: -140px;
+          top: -100px;
+          animation: d1 14s ease-in-out infinite alternate
+        }
+
+        .b2 {
+          width: 620px;
+          height: 620px;
+          background: #2D5BFF;
+          right: -180px;
+          top: 60px;
+          animation: d2 18s ease-in-out infinite alternate
+        }
+
+        .b3 {
+          width: 380px;
+          height: 380px;
+          background: #FFB020;
+          left: 40%;
+          bottom: -160px;
+          animation: d3 11s ease-in-out infinite alternate
+        }
+
+        @keyframes d1 {
+          to {
+            transform: translate(180px, 140px)
+          }
+        }
+
+        @keyframes d2 {
+          to {
+            transform: translate(-220px, 90px)
+          }
+        }
+
+        @keyframes d3 {
+          to {
+            transform: translate(-200px, -60px)
+          }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+
+          .blob,
+          .track {
+            animation: none
+          }
+        }
+      </style>
+    </helmet>
+
+    <div style="width:100%;background:#0C0B10;color:#F2EEE8">
+
+      <!-- PAINEL DE ACESSO RAPIDO -->
+      <div role="navigation" aria-label="Acesso rápido"
+        style="position:sticky;top:0;z-index:50;background:#14121A;border-bottom:1px solid rgba(255,255,255,.14)">
+        <div class="wrap" style="display:flex;align-items:center;gap:16px">
+          <header class="wrap"
+            style="position:relative;width:100%;padding-top:24px;padding-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+            <a href="#topo" class="d" style="font-size:28px;line-height:1">Diogo Garay</a>
+            <button type="button" class="menu-toggle" aria-label="Menu de navegação" aria-expanded="{{menuExpanded}}"
+              aria-controls="menu-principal" onClick="{{toggleMenu}}">
+              <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+            </button>
+            <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+              <nav id="menu-principal" class="menu-panel" aria-label="Navegação principal">
+                <a href="#trabalhos" onClick="{{closeMenu}}">Trabalhos</a>
+                <a href="#servicos" onClick="{{closeMenu}}">Serviços</a>
+                <a href="#sobre" onClick="{{closeMenu}}">Sobre</a>
+                <a href="#contato" class="menu-quote" onClick="{{closeMenu}}">Pedir orçamento</a>
+              </nav>
+            </sc-if>
+          </header>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <section id="topo"
+        style="position:relative;overflow:hidden;min-height:720px;display:flex;flex-direction:column;justify-content:space-between;background:#0C0B10">
+        <div style="position:absolute;inset:0;overflow:hidden" aria-hidden="true">
+          <div class="blob b1"></div>
+          <div class="blob b2"></div>
+          <div class="blob b3"></div>
+          <div
+            style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,11,16,.55),rgba(12,11,16,.15) 40%,rgba(12,11,16,.9))">
+          </div>
+        </div>
+
+        <div class="wrap"
+          style="position:relative;width:100%;padding-bottom:56px;display:flex;flex-direction:column;gap:28px">
+          <div
+            style="align-self:flex-start;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#D8D3DD">
+            Aqui entra um vídeo em loop dos melhores momentos</div>
+          <h1 class="d" style="margin:0;font-size:clamp(56px,12vw,176px);line-height:.88;text-wrap:balance">
+            Fotógrafo<br><span style="color:{{accent}}">&amp;</span> videomaker</h1>
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
+            <p style="margin:0;max-width:460px;font-size:19px;line-height:1.5;color:#E6E1EA">Registro seus melhores
+              momentos. Festas, shows e eventos em Cuiabá e região, em fotos e vídeos prontos para postar.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px">
+              <a href="#trabalhos" class="btn"
+                style="background:#F2EEE8;color:#0C0B10;padding:15px 26px;border-radius:999px;font-weight:700">Ver
+                trabalhos</a>
+              <a href="#contato" class="btn"
+                style="border:1px solid rgba(255,255,255,.45);padding:15px 26px;border-radius:999px;font-weight:700">Falar
+                com o Diogo</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAIXA DE FOTOS -->
+      <section aria-label="Faixa de fotos" style="overflow:hidden;padding:12px 0;background:#0C0B10">
+        <div class="track">
+          <sc-for list="{{strip}}" as="s" hint-placeholder-count="10">
+            <div
+              style="flex:none;width:200px;height:280px;border-radius:6px;position:relative;overflow:hidden;background:{{s.bg}}">
+              <div
+                style="position:absolute;left:12px;top:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)">
+                {{s.label}}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <!-- SHOWREEL -->
+      <section id="showreel" style="padding:clamp(64px,10vw,128px) 0 clamp(48px,8vw,96px)">
+        <div class="wrap" style="display:flex;flex-direction:column;gap:48px">
+          <h2 class="d"
+            style="margin:0;max-width:980px;font-size:clamp(36px,6vw,84px);line-height:.95;text-wrap:balance">Seu evento
+            vira conteúdo <span style="color:{{accent}}">pronto para postar</span> e compartilhar.</h2>
+          <a href="#trabalhos" aria-label="Assistir ao showreel"
+            style="position:relative;display:block;aspect-ratio:16/9;max-height:640px;width:100%;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 20% 30%,#FF2D55 0,transparent 40%),radial-gradient(circle at 80% 70%,#2D5BFF 0,transparent 45%),linear-gradient(160deg,#1A1522,#0A090E)">
+            <div style="position:absolute;inset:0;background:rgba(10,9,14,.35)"></div>
+            <div
+              style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:16px">
+              <span
+                style="display:flex;align-items:center;justify-content:center;width:88px;height:88px;border-radius:50%;background:{{accent}};color:#0C0B10">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z"></path>
+                </svg>
+              </span>
+              <span class="d" style="font-size:28px;letter-spacing:.06em">Showreel</span>
+            </div>
+            <div style="position:absolute;left:20px;bottom:16px;font-size:13px;color:#E6E1EA">Clique para assistir</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- TRABALHOS -->
+      <section id="trabalhos" style="padding:clamp(48px,8vw,96px) 0">
+        <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px">
+            <h2 class="d" style="margin:0;font-size:clamp(44px,8vw,112px);line-height:.9">Trabalhos</h2>
+            <div role="group" aria-label="Filtrar trabalhos" style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+                <button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}"
+                  style="cursor:pointer;min-height:44px;padding:0 20px;border-radius:999px;font:inherit;font-weight:700;font-size:15px;background:{{c.bg}};color:{{c.fg}};border:1px solid {{c.bd}}">{{c.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div class="masonry">
+            <sc-for list="{{gallery}}" as="g" hint-placeholder-count="6">
+              <figure
+                style="margin:0 0 12px;position:relative;overflow:hidden;border-radius:6px;break-inside:avoid;aspect-ratio:{{g.ratio}};background:{{g.bg}}">
+                <div
+                  style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,7,12,.88),rgba(8,7,12,0) 48%)">
+                </div>
+                <div
+                  style="position:absolute;left:14px;top:12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)">
+                  Espaço para foto</div>
+                <figcaption
+                  style="position:absolute;left:14px;right:14px;bottom:12px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px">
+                  <div>
+                    <div
+                      style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:{{accent}};font-weight:700">
+                      {{g.tag}}</div>
+                    <div style="font-size:17px;font-weight:500;margin-top:2px">{{g.title}}</div>
+                  </div>
+                  <sc-if value="{{g.isVideo}}" hint-placeholder-val="{{ false }}">
+                    <span aria-label="Vídeo"
+                      style="flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#F2EEE8;color:#0C0B10">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M8 5v14l11-7z"></path>
+                      </svg>
+                    </span>
+                  </sc-if>
+                </figcaption>
+              </figure>
+            </sc-for>
+          </div>
+          <div style="display:flex;justify-content:center;padding-top:16px">
+            <a href="https://www.instagram.com/di.garay/" class="btn"
+              style="border:1px solid rgba(255,255,255,.45);padding:15px 28px;border-radius:999px;font-weight:700">Ver
+              mais no Instagram @di.garay</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVIÇOS -->
+      <section id="servicos" style="padding:clamp(48px,8vw,96px) 0;background:#14121A">
+        <div class="wrap" style="display:flex;flex-direction:column;gap:40px">
+          <h2 class="d" style="margin:0;font-size:clamp(44px,8vw,112px);line-height:.9">O que eu faço</h2>
+          <div class="svc">
+            <article
+              style="display:flex;flex-direction:column;gap:14px;padding:28px 24px;border:1px solid rgba(255,255,255,.14);border-radius:8px;min-height:300px;background:#0C0B10">
+              <h3 class="d" style="margin:0;font-size:36px;line-height:1">Fotos de shows</h3>
+              <p style="margin:0;line-height:1.55;color:#C9C4D0">A energia do palco e da plateia, nítida mesmo no escuro
+                e na luz de LED.</p>
+              <a href="#trabalhos" style="margin-top:auto;font-weight:700;color:{{accent}}">Ver projetos →</a>
+            </article>
+            <article
+              style="display:flex;flex-direction:column;gap:14px;padding:28px 24px;border:1px solid rgba(255,255,255,.14);border-radius:8px;min-height:300px;background:#0C0B10">
+              <h3 class="d" style="margin:0;font-size:36px;line-height:1">Fotos de festas</h3>
+              <p style="margin:0;line-height:1.55;color:#C9C4D0">Você e a galera curtindo, em fotos naturais, sem
+                ninguém perceber a câmera.</p>
+              <a href="#trabalhos" style="margin-top:auto;font-weight:700;color:{{accent}}">Ver projetos →</a>
+            </article>
+            <article
+              style="display:flex;flex-direction:column;gap:14px;padding:28px 24px;border:1px solid rgba(255,255,255,.14);border-radius:8px;min-height:300px;background:#0C0B10">
+              <h3 class="d" style="margin:0;font-size:36px;line-height:1">Reels e vídeos curtos</h3>
+              <p style="margin:0;line-height:1.55;color:#C9C4D0">Cortes rápidos dos melhores momentos, prontos para
+                Instagram e TikTok.</p>
+              <a href="#trabalhos" style="margin-top:auto;font-weight:700;color:{{accent}}">Ver projetos →</a>
+            </article>
+            <article
+              style="display:flex;flex-direction:column;gap:14px;padding:28px 24px;border:1px solid rgba(255,255,255,.14);border-radius:8px;min-height:300px;background:#0C0B10">
+              <h3 class="d" style="margin:0;font-size:36px;line-height:1">Aftermovie</h3>
+              <p style="margin:0;line-height:1.55;color:#C9C4D0">O resumo do evento em vídeo, para reviver a noite e
+                divulgar a próxima edição.</p>
+              <a href="#trabalhos" style="margin-top:auto;font-weight:700;color:{{accent}}">Ver projetos →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- EVENTOS -->
+      <section style="padding:clamp(40px,6vw,72px) 0;border-bottom:1px solid rgba(255,255,255,.1)">
+        <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:20px 48px">
+          <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#A9A4B3">Já registrei</div>
+          <div class="d"
+            style="display:flex;flex-wrap:wrap;gap:12px 40px;font-size:clamp(24px,3.4vw,40px);line-height:1">
+            <span>Vintage Culture · Sinop</span>
+            <span>Zé Neto &amp; Cristiano</span>
+            <span>Manifesto Musical</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" style="padding:clamp(64px,10vw,128px) 0">
+        <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:48px">
+          <div
+            style="flex:1 1 360px;max-width:520px;aspect-ratio:4/5;border-radius:8px;position:relative;overflow:hidden;background:radial-gradient(circle at 30% 25%,#FFB020 0,transparent 40%),radial-gradient(circle at 80% 80%,#8A2BE2 0,transparent 50%),linear-gradient(160deg,#1A1522,#0A090E)">
+            <div
+              style="position:absolute;left:16px;top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)">
+              Espaço para foto do Diogo</div>
+          </div>
+          <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:24px">
+            <h2 class="d" style="margin:0;font-size:clamp(40px,6vw,88px);line-height:.92;text-wrap:balance">Capturando a
+              energia de quem <span style="color:{{accent}}">vive a noite</span></h2>
+            <p style="margin:0;max-width:560px;font-size:18px;line-height:1.6;color:#D8D3DD">Sou o Diogo, fotógrafo e
+              videomaker de Cuiabá. Fotografo e gravo festas e shows para que cada pessoa possa reviver o momento depois
+              que a noite acaba.</p>
+            <p style="margin:0;max-width:560px;font-size:16px;line-height:1.6;color:#A9A4B3">[Aqui entra a história do
+              Diogo: há quanto tempo fotografa, estilo, equipamentos.]</p>
+            <div>
+              <a href="#contato" class="btn"
+                style="display:inline-block;background:#F2EEE8;color:#0C0B10;padding:15px 28px;border-radius:999px;font-weight:700">Vamos
+                conversar</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMO FUNCIONA -->
+      <section style="padding:clamp(48px,8vw,96px) 0;background:#14121A">
+        <div class="wrap" style="display:flex;flex-direction:column;gap:40px">
+          <h2 class="d" style="margin:0;font-size:clamp(44px,8vw,112px);line-height:.9">Como funciona</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:16px">
+            <div
+              style="flex:1 1 280px;display:flex;flex-direction:column;gap:12px;padding:28px 24px;border-top:3px solid {{accent}};background:#0C0B10">
+              <h3 class="d" style="margin:0;font-size:34px;line-height:1">Você chama</h3>
+              <p style="margin:0;line-height:1.55;color:#C9C4D0">Conta a data, o tipo de evento e o que você quer
+                registrar. Eu respondo com o orçamento.</p>
+            </div>
+            <div
+              style="flex:1 1 280px;display:flex;flex-direction:column;gap:12px;padding:28px 24px;border-top:3px solid {{accent}};background:#0C0B10">
+              <h3 class="d" style="margin:0;font-size:34px;line-height:1">Eu registro</h3>
+              <p style="margin:0;line-height:1.55;color:#C9C4D0">Cubro o evento com fotos e vídeos, atento aos melhores
+                momentos.</p>
+            </div>
+            <div
+              style="flex:1 1 280px;display:flex;flex-direction:column;gap:12px;padding:28px 24px;border-top:3px solid {{accent}};background:#0C0B10">
+              <h3 class="d" style="margin:0;font-size:34px;line-height:1">Você recebe</h3>
+              <p style="margin:0;line-height:1.55;color:#C9C4D0">Galeria online para baixar e compartilhar em [PRAZO DE
+                ENTREGA].</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTATO -->
+      <section id="contato" style="padding:clamp(64px,10vw,128px) 0">
+        <div class="wrap" style="display:flex;flex-wrap:wrap;gap:56px">
+          <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:28px">
+            <h2 class="d" style="margin:0;font-size:clamp(44px,8vw,112px);line-height:.9;text-wrap:balance">Vamos
+              registrar o seu próximo evento?</h2>
+            <div style="display:flex;flex-direction:column;gap:14px;font-size:18px">
+              <div style="color:#A9A4B3;font-size:13px;letter-spacing:.1em;text-transform:uppercase">WhatsApp</div>
+              <a href="https://wa.me/" style="font-weight:700">[SEU WHATSAPP]</a>
+              <div style="color:#A9A4B3;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-top:8px">
+                Instagram</div>
+              <a href="https://www.instagram.com/di.garay/" style="font-weight:700">@di.garay</a>
+              <div style="color:#A9A4B3;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-top:8px">
+                Atendimento</div>
+              <div style="font-weight:700">Cuiabá, MT e região</div>
+            </div>
+          </div>
+          <div style="flex:1 1 380px;min-width:0">
+            <sc-if value="{{unsent}}" hint-placeholder-val="{{ true }}">
+              <form onSubmit="{{send}}" style="display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <label for="f-nome" style="font-size:14px;font-weight:500">Seu nome</label>
+                  <input id="f-nome" class="field" type="text" autocomplete="name">
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <label for="f-zap" style="font-size:14px;font-weight:500">WhatsApp</label>
+                  <input id="f-zap" class="field" type="tel" autocomplete="tel">
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:16px">
+                  <div style="flex:1 1 180px;display:flex;flex-direction:column;gap:6px">
+                    <label for="f-tipo" style="font-size:14px;font-weight:500">Tipo de evento</label>
+                    <select id="f-tipo" class="field">
+                      <option>Show</option>
+                      <option>Festa</option>
+                      <option>Aniversário ou formatura</option>
+                      <option>Outro</option>
+                    </select>
+                  </div>
+                  <div style="flex:1 1 180px;display:flex;flex-direction:column;gap:6px">
+                    <label for="f-data" style="font-size:14px;font-weight:500">Data do evento</label>
+                    <input id="f-data" class="field" type="date">
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <label for="f-msg" style="font-size:14px;font-weight:500">Conte um pouco sobre o evento</label>
+                  <textarea id="f-msg" class="field" rows="4" style="resize:vertical"></textarea>
+                </div>
+                <button type="submit" class="btn"
+                  style="cursor:pointer;min-height:52px;border:0;border-radius:999px;background:{{accent}};color:#0C0B10;font:inherit;font-weight:700;font-size:17px">Enviar
+                  pedido de orçamento</button>
+              </form>
+            </sc-if>
+            <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+              <div role="status"
+                style="padding:32px 28px;border:1px solid {{accent}};border-radius:8px;display:flex;flex-direction:column;gap:10px">
+                <h3 class="d" style="margin:0;font-size:36px;line-height:1">Pedido recebido</h3>
+                <p style="margin:0;line-height:1.55;color:#D8D3DD">O Diogo responde pelo WhatsApp em breve.
+                  (Demonstração: nesta versão o formulário não envia dados.)</p>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </section>
+
+      <!-- RODAPÉ -->
+      <footer style="padding:56px 0 32px;border-top:1px solid rgba(255,255,255,.12)">
+        <div class="wrap" style="display:flex;flex-direction:column;gap:40px">
+          <div class="d" style="font-size:clamp(56px,13vw,200px);line-height:.85;color:#1E1B27">Diogo Garay</div>
+          <div
+            style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;font-size:15px">
+            <nav class="nav" style="display:flex;flex-wrap:wrap;gap:8px 24px">
+              <a href="#trabalhos">Trabalhos</a>
+              <a href="#servicos">Serviços</a>
+              <a href="#sobre">Sobre</a>
+              <a href="#contato">Contato</a>
+              <a href="https://www.instagram.com/di.garay/">Instagram</a>
+            </nav>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 24px;color:#A9A4B3">
+              <span>© 2026 Diogo Garay. Fotografia e videomaker.</span>
+              <a href="#topo" style="color:#F2EEE8">Voltar ao topo ↑</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </x-dc>
+  <script type="text/x-dc" data-dc-script
+    data-props='{"accent":{"editor":"color","default":"#FF5A36","options":["#FF5A36","#FF2D55","#FFB020","#18D1E0"],"section":"Cor"},"$preview":{"width":1440,"height":6400}}'>
+class Component extends DCLogic {
+  state = { filter: 'todos', sent: false, menuOpen: false };
+
+  renderVals() {
+    const accent = this.props.accent ?? '#FF5A36';
+    const light = (a, b, x1, y1, x2, y2) =>
+      'radial-gradient(circle at ' + x1 + '% ' + y1 + '%, ' + a + ' 0, transparent 42%), radial-gradient(circle at ' + x2 + '% ' + y2 + '%, ' + b + ' 0, transparent 48%), linear-gradient(160deg, #17131F, #0A090E)';
+    const RB = (x1, y1, x2, y2) => light('#FF2D55', '#2D5BFF', x1, y1, x2, y2);
+    const AV = (x1, y1, x2, y2) => light('#FFB020', '#8A2BE2', x1, y1, x2, y2);
+    const CM = (x1, y1, x2, y2) => light('#18D1E0', '#FF2FA0', x1, y1, x2, y2);
+    const OT = (x1, y1, x2, y2) => light('#FF6A2B', '#14B8A6', x1, y1, x2, y2);
+
+    const all = [
+      { id: 1, cat: 'shows', tag: 'Show', title: 'Palco em chamas', ratio: '4/5', bg: RB(25, 20, 80, 75), isVideo: false },
+      { id: 2, cat: 'festas', tag: 'Festa', title: 'Pista cheia', ratio: '1/1', bg: AV(70, 25, 25, 80), isVideo: false },
+      { id: 3, cat: 'videos', tag: 'Aftermovie', title: 'Resumo do festival', ratio: '16/10', bg: CM(20, 30, 85, 70), isVideo: true },
+      { id: 4, cat: 'shows', tag: 'Show', title: 'Plateia de braços erguidos', ratio: '4/5', bg: OT(75, 20, 20, 75), isVideo: false },
+      { id: 5, cat: 'festas', tag: 'Festa', title: 'Retrato na pista', ratio: '3/4', bg: AV(30, 70, 80, 25), isVideo: false },
+      { id: 6, cat: 'shows', tag: 'Show', title: 'Laser no refrão', ratio: '1/1', bg: CM(80, 25, 20, 70), isVideo: false },
+      { id: 7, cat: 'videos', tag: 'Reels', title: 'Bastidores da noite', ratio: '4/5', bg: RB(75, 30, 25, 80), isVideo: true },
+      { id: 8, cat: 'festas', tag: 'Festa', title: 'Brinde da galera', ratio: '16/10', bg: OT(25, 25, 80, 70), isVideo: false },
+      { id: 9, cat: 'shows', tag: 'Show', title: 'Close no artista', ratio: '3/4', bg: RB(60, 20, 30, 85), isVideo: false },
+      { id: 10, cat: 'festas', tag: 'Festa', title: 'Fantasia e flash', ratio: '4/5', bg: CM(35, 25, 75, 80), isVideo: false },
+      { id: 11, cat: 'videos', tag: 'Teaser', title: 'Próxima edição', ratio: '1/1', bg: AV(20, 75, 80, 30), isVideo: true },
+      { id: 12, cat: 'shows', tag: 'Show', title: 'Visão do pit', ratio: '16/10', bg: OT(80, 70, 25, 25), isVideo: false }
+    ];
+
+    const f = this.state.filter;
+    const gallery = f === 'todos' ? all : all.filter((g) => g.cat === f);
+
+    const chipDefs = [
+      { id: 'todos', label: 'Todos' },
+      { id: 'shows', label: 'Shows' },
+      { id: 'festas', label: 'Festas' },
+      { id: 'videos', label: 'Vídeos' }
+    ];
+    const chips = chipDefs.map((c) => {
+      const on = f === c.id;
+      return {
+        label: c.label,
+        pressed: on ? 'true' : 'false',
+        bg: on ? accent : 'transparent',
+        fg: on ? '#0C0B10' : '#F2EEE8',
+        bd: on ? accent : 'rgba(255,255,255,0.35)',
+        pick: () => this.setState({ filter: c.id })
+      };
+    });
+
+    const stripBase = [
+      { label: 'Foto', bg: RB(25, 20, 80, 75) },
+      { label: 'Foto', bg: AV(70, 25, 25, 80) },
+      { label: 'Foto', bg: CM(20, 30, 85, 70) },
+      { label: 'Foto', bg: OT(75, 20, 20, 75) },
+      { label: 'Foto', bg: RB(60, 70, 30, 25) },
+      { label: 'Foto', bg: AV(30, 70, 80, 25) },
+      { label: 'Foto', bg: CM(80, 25, 20, 70) },
+      { label: 'Foto', bg: OT(25, 25, 80, 70) }
+    ];
+    const strip = stripBase.concat(stripBase);
+
+    return {
+      accent,
+      menuOpen: this.state.menuOpen,
+      menuExpanded: this.state.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      gallery,
+      chips,
+      strip,
+      unsent: !this.state.sent,
+      sent: this.state.sent,
+      send: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        this.setState({ sent: true });
+      }
+    };
+  }
+}
+</script>
+</body>
+
+</html>
